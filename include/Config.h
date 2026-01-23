@@ -22,6 +22,6 @@ const char CHAR_EMPTY = ' ';
 const char CHAR_SNAKE = 'O';
 const char CHAR_FOOD = '*';
 
-const float FRAME_RATE = 24;
+const float SPEED_DEFAULT = 2;
 
 #endif

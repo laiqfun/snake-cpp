@@ -15,13 +15,15 @@ private:
   void restoreMap();
   void draw();
   void addPoints(vector<Point> points, char point_char);
-  bool isPause = true;
+  bool isPause;
   clock_t pastTime;
 
   char inputKey;
   void snakeMovement();
 
-  bool gameOver = false;
+  float speed;
+
+  bool gameOver;
   void gameCheck();
 
   void play();

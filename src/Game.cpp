@@ -10,7 +10,8 @@ using namespace std;
 
 Game::Game()
     : map_size(MAP_SIZE), map(MAP_SIZE, vector<char>(MAP_SIZE)),
-      snake(startPosition) {
+      snake(startPosition), isPause(false), speed(SPEED_DEFAULT),
+      gameOver(false) {
   update();
 }
 
@@ -69,7 +70,7 @@ void Game::snakeMovement() {
   snake.move();
 }
 
-void Game::gameCheck(){
+void Game::gameCheck() {
   Point p = snake.getHead();
   gameOver = !(p.x > 0 && p.x < map_size - 1 && p.y > 0 && p.y < map_size - 1);
 }
@@ -87,13 +88,13 @@ void Game::update() {
         isPause = !isPause;
       }
     }
-    if (!isPause && (clock() - pastTime) / CLOCKS_PER_SEC >= 1.0 / FRAME_RATE) {
+    if (!isPause && float(clock() - pastTime) / CLOCKS_PER_SEC >= 1.0 / speed) {
       // logic
       pastTime = clock();
       snakeMovement();
       gameCheck();
-      if(gameOver){
-        cout<<"Game Over!"<<endl;
+      if (gameOver) {
+        cout << "Game Over!" << endl;
         break;
       }
       // render
