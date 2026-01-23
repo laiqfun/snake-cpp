@@ -1,0 +1,27 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#include "time.h"
+
+const int MAP_SIZE = 11;
+
+enum Direction { Up, Down, Left, Right };
+
+struct Point {
+  int x, y;
+  Point() : x(0), y(0) {}
+  Point(int x, int y) : x(x), y(y) {}
+
+  Point operator+(const Point &p) const { return {x + p.x, y + p.y}; }
+};
+
+const Point startPosition = {MAP_SIZE / 2, MAP_SIZE / 2};
+
+const char CHAR_BORDER = '#';
+const char CHAR_EMPTY = ' ';
+const char CHAR_SNAKE = 'O';
+const char CHAR_FOOD = '*';
+
+const float FRAME_RATE = 24;
+
+#endif
