@@ -25,6 +25,13 @@ const char CHAR_FOOD = '*';
 
 const float SPEED_DEFAULT = 2;
 
+const char KEY_MOVE_UP = 'w';
+const char KEY_MOVE_DOWN = 's';
+const char KEY_MOVE_LEFT = 'a';
+const char KEY_MOVE_RIGHT = 'd';
+const char KEY_QUIT = 'q';
+const char KEY_PAUSE = ' ';
+
 Point getDirectonVector(Direction dir);
 
 #endif

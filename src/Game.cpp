@@ -54,16 +54,16 @@ void Game::pause() { isPause = true; }
 
 void Game::snakeMovement() {
   switch (inputKey) {
-  case 'w':
+  case KEY_MOVE_UP:
     snake.turn(Up);
     break;
-  case 's':
+  case KEY_MOVE_DOWN:
     snake.turn(Down);
     break;
-  case 'a':
+  case KEY_MOVE_LEFT:
     snake.turn(Left);
     break;
-  case 'd':
+  case KEY_MOVE_RIGHT:
     snake.turn(Right);
     break;
   }
@@ -129,10 +129,10 @@ void Game::update() {
     // input
     if (_kbhit()) {
       inputKey = _getch();
-      if (inputKey == 'q') {
+      if (inputKey == KEY_QUIT) {
         cout << "Good bye!" << endl;
         break;
-      } else if (inputKey == ' ') {
+      } else if (inputKey == KEY_PAUSE) {
         isPause = !isPause;
       }
     }
