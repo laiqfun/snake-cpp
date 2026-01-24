@@ -10,7 +10,7 @@ using namespace std;
 
 Game::Game()
     : map_size(MAP_SIZE), map(MAP_SIZE, vector<char>(MAP_SIZE)),
-      snake(startPosition), isPause(false), speed(SPEED_DEFAULT),
+      snake(startPosition), food(), isPause(false), speed(SPEED_DEFAULT),
       gameOver(false) {
   update();
 }
@@ -70,9 +70,48 @@ void Game::snakeMovement() {
   snake.move();
 }
 
+void Game::makeFood() {
+  vector<vector<bool>> unavailableMap(map_size, vector<bool>(map_size));
+  vector<Point> availableMap;
+  for (int i = 0; i < map_size; i++) {
+    unavailableMap[0][i] = 1;
+    unavailableMap[map_size - 1][i] = 1;
+    unavailableMap[i][0] = 1;
+    unavailableMap[i][map_size - 1] = 1;
+  }
+  for (auto p : snake.getSegments()) {
+    unavailableMap[p.x][p.y] = 1;
+  }
+  for (int i = 0; i < map_size; i++) {
+    for (int j = 0; j < map_size; j++) {
+      if (!unavailableMap[i][j]) {
+        availableMap.push_back(Point{i, j});
+      }
+    }
+  }
+  food.spawnFood(availableMap);
+}
+
 void Game::gameCheck() {
   Point p = snake.getHead();
   gameOver = !(p.x > 0 && p.x < map_size - 1 && p.y > 0 && p.y < map_size - 1);
+  if (gameOver)
+    return;
+
+  vector<Point> foods = food.getPositions();
+  if (foods.empty()) {
+    makeFood();
+  } else {
+    for (auto f : foods) {
+      if (p.x == f.x && p.y == f.y) {
+        food.eatFood(f);
+        snake.grow();
+
+        makeFood();
+        break;
+      }
+    }
+  }
 }
 
 void Game::update() {
@@ -100,6 +139,7 @@ void Game::update() {
       // render
       restoreMap();
       addPoints(snake.getSegments(), CHAR_SNAKE);
+      addPoints(food.getPositions(), CHAR_FOOD);
 
       system("cls");
       draw();

@@ -7,10 +7,6 @@ Snake::Snake(Point initialPosition) { segments.push_back(initialPosition); }
 
 Snake::~Snake() {}
 
-Point Snake::getHead() { return segments[0]; }
-
-vector<Point> Snake::getSegments() { return segments; }
-
 void Snake::grow() {
   if (segments.size() > 0) {
     segments.push_back(segments[segments.size() - 1]);

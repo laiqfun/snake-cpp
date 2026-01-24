@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "time.h"
+#include "ctime"
 
 const int MAP_SIZE = 11;
 

@@ -3,7 +3,8 @@
 
 #include "Config.h"
 #include "Snake.h"
-#include <time.h>
+#include "Food.h"
+#include <ctime>
 #include <vector>
 using namespace std;
 
@@ -12,9 +13,11 @@ private:
   int map_size;
   vector<vector<char>> map;
   Snake snake;
+  Food food;
   void restoreMap();
   void draw();
   void addPoints(vector<Point> points, char point_char);
+  void makeFood();
   bool isPause;
   clock_t pastTime;
 
