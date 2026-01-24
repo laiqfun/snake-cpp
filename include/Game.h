@@ -2,8 +2,8 @@
 #define GAME_H
 
 #include "Config.h"
-#include "Snake.h"
 #include "Food.h"
+#include "Snake.h"
 #include <ctime>
 #include <vector>
 using namespace std;

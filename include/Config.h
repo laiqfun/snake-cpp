@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "ctime"
+#include <ctime>
 
 const int MAP_SIZE = 11;
 
@@ -13,7 +13,7 @@ struct Point {
   Point(int x, int y) : x(x), y(y) {}
 
   Point operator+(const Point &p) const { return {x + p.x, y + p.y}; }
-  bool operator==(const Point &p) const { return p.x == x && p.y == y;}
+  bool operator==(const Point &p) const { return p.x == x && p.y == y; }
 };
 
 const Point startPosition = {MAP_SIZE / 2, MAP_SIZE / 2};

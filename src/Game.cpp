@@ -97,8 +97,8 @@ void Game::gameCheck() {
   gameOver = !(p.x > 0 && p.x < map_size - 1 && p.y > 0 && p.y < map_size - 1);
 
   vector<Point> segments = snake.getSegments();
-  for(int i=1;i<snake.getLength();i++){
-    if(p == segments[i]){
+  for (int i = 1; i < snake.getLength(); i++) {
+    if (p == segments[i]) {
       gameOver = true;
       break;
     }
