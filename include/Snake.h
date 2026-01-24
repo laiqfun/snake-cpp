@@ -8,7 +8,7 @@ using namespace std;
 class Snake {
 private:
   vector<Point> segments;
-  Direction dir = Up;
+  Direction dir;
 
 public:
   Snake(Point initialPosition);
@@ -17,6 +17,7 @@ public:
   void decline();
   void move();
   void turn(Direction d);
+  int getLength() const { return segments.size(); };
   Point getHead() const { return segments[0]; };
   vector<Point> getSegments() const { return segments; };
 };

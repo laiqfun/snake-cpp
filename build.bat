@@ -13,7 +13,7 @@ if "%1"=="clean" (
 )
 
 echo Compiling...
-g++ -o snake_game src/main.cpp src/Game.cpp src/Snake.cpp src/Food.cpp -I include -Wall -std=c++11
+g++ -o snake_game src/main.cpp src/Game.cpp src/Snake.cpp src/Food.cpp src/Config.cpp -I include -Wall -std=c++11
 
 if %errorlevel% equ 0 (
     echo.

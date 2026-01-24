@@ -95,6 +95,15 @@ void Game::makeFood() {
 void Game::gameCheck() {
   Point p = snake.getHead();
   gameOver = !(p.x > 0 && p.x < map_size - 1 && p.y > 0 && p.y < map_size - 1);
+
+  vector<Point> segments = snake.getSegments();
+  for(int i=1;i<snake.getLength();i++){
+    if(p == segments[i]){
+      gameOver = true;
+      break;
+    }
+  }
+
   if (gameOver)
     return;
 
@@ -103,7 +112,7 @@ void Game::gameCheck() {
     makeFood();
   } else {
     for (auto f : foods) {
-      if (p.x == f.x && p.y == f.y) {
+      if (p == f) {
         food.eatFood(f);
         snake.grow();
 

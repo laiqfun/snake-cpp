@@ -3,7 +3,9 @@
 #include <vector>
 using namespace std;
 
-Snake::Snake(Point initialPosition) { segments.push_back(initialPosition); }
+Snake::Snake(Point initialPosition) : dir(Up) {
+  segments.push_back(initialPosition);
+}
 
 Snake::~Snake() {}
 
@@ -23,22 +25,13 @@ void Snake::move() {
   for (int i = segments.size() - 1; i >= 1; i--) {
     segments[i] = segments[i - 1];
   }
-  Point dirVector(0, 0);
-  switch (dir) {
-  case Up:
-    dirVector = Point{-1, 0};
-    break;
-  case Down:
-    dirVector = Point{1, 0};
-    break;
-  case Left:
-    dirVector = Point{0, -1};
-    break;
-  case Right:
-    dirVector = Point{0, 1};
-    break;
-  }
+  Point dirVector = getDirectonVector(dir);
   segments[0] = segments[0] + dirVector;
 }
 
-void Snake::turn(Direction d) { dir = d; }
+void Snake::turn(Direction d) {
+  if (getDirectonVector(d) + getDirectonVector(dir) ==
+      Point{0, 0}) // 贪吃蛇不能直接回头
+    return;
+  dir = d;
+}
