@@ -17,7 +17,7 @@ public:
   void decline();
   void move();
   void turn(Direction d);
-  int getLength() const { return segments.size(); };
+  size_t getLength() const { return segments.size(); };
   Point getHead() const { return segments[0]; };
   vector<Point> getSegments() const { return segments; };
 };

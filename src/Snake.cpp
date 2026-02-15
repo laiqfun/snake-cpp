@@ -22,7 +22,7 @@ void Snake::decline() {
 }
 
 void Snake::move() {
-  for (int i = segments.size() - 1; i >= 1; i--) {
+  for (size_t i = segments.size() - 1; i >= 1; i--) {
     segments[i] = segments[i - 1];
   }
   Point dirVector = getDirectonVector(dir);
@@ -31,7 +31,7 @@ void Snake::move() {
 
 void Snake::turn(Direction d) {
   if (getDirectonVector(d) + getDirectonVector(dir) ==
-      Point{0, 0}) // 贪吃蛇不能直接回头
+      Point{0, 0} && getLength() > 1)
     return;
   dir = d;
 }
