@@ -4,19 +4,23 @@
 
 ## Build and Run
 
+### Using CMake
 ```bash
-# 运行 build.bat脚本
-build.bat
-```
+# 创建构建目录
+mkdir build
+cd build
 
-or
+# 生成构建文件
+cmake ..
 
-```bash
-# 编译生成 snake_game.exe
-g++ -o snake_game src/main.cpp src/Game.cpp src/Snake.cpp src/Food.cpp src/Config.cpp -I include -Wall -std=c++11
+# 编译
+cmake --build .
 
-# 运行
-snake_game.exe
+# 运行（Windows）
+./Debug/snake_game.exe  # 或 ./Release/snake_game.exe
+
+# 运行（Linux/macOS）
+./snake_game
 ```
 
 ## Config
