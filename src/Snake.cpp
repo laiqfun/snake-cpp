@@ -1,6 +1,5 @@
 #include "Snake.h"
-#include "Config.h"
-#include <vector>
+
 using namespace std;
 
 Snake::Snake(Point initialPosition) : dir(Up) {
@@ -22,15 +21,15 @@ void Snake::decline() {
 }
 
 void Snake::move() {
-  for (size_t i = segments.size() - 1; i >= 1; i--) {
+  for (size_t i = segments.size() - 1; i > 0; i--) {
     segments[i] = segments[i - 1];
   }
-  Point dirVector = getDirectonVector(dir);
+  Point dirVector = getDirectionVector(dir);
   segments[0] = segments[0] + dirVector;
 }
 
 void Snake::turn(Direction d) {
-  if (getDirectonVector(d) + getDirectonVector(dir) ==
+  if (getDirectionVector(d) + getDirectionVector(dir) ==
       Point{0, 0} && getLength() > 1)
     return;
   dir = d;

@@ -6,17 +6,17 @@
 #include "Snake.h"
 #include <ctime>
 #include <vector>
-using namespace std;
 
 class Game {
 private:
   int map_size;
-  vector<vector<char>> map;
+  std::vector<std::vector<char>> map;
   Snake snake;
   Food food;
+  void initMap();
   void restoreMap();
   void draw();
-  void addPoints(vector<Point> points, char point_char);
+  void addPoints(const std::vector<Point> &points, char point_char);
   void makeFood();
   bool isPause;
   clock_t pastTime;
@@ -36,6 +36,7 @@ private:
 public:
   Game();
   ~Game();
+  void start();
 };
 
 #endif

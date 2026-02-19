@@ -3,11 +3,10 @@
 
 #include "Config.h"
 #include <vector>
-using namespace std;
 
 class Snake {
 private:
-  vector<Point> segments;
+  std::vector<Point> segments;
   Direction dir;
 
 public:
@@ -19,7 +18,7 @@ public:
   void turn(Direction d);
   size_t getLength() const { return segments.size(); };
   Point getHead() const { return segments[0]; };
-  vector<Point> getSegments() const { return segments; };
+  const std::vector<Point> &getSegments() const { return segments; };
 };
 
 #endif

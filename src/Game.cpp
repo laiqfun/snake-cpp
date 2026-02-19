@@ -1,23 +1,20 @@
 #include "Game.h"
-#include "Config.h"
-#include "Snake.h"
 #include <conio.h>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-#include <vector>
 using namespace std;
 
 Game::Game()
     : map_size(MAP_SIZE), map(MAP_SIZE, vector<char>(MAP_SIZE)),
       snake(startPosition), food(), isPause(false), speed(SPEED_DEFAULT),
       gameOver(false) {
-  update();
+  initMap();
 }
 
 Game::~Game() {}
 
-void Game::restoreMap() {
+void Game::initMap() {
   for (int i = 0; i < map_size; i++) {
     for (int j = 0; j < map_size; j++) {
       if (i == 0 || i == map_size - 1 || j == 0 || j == map_size - 1) {
@@ -25,6 +22,15 @@ void Game::restoreMap() {
       } else {
         map[i][j] = CHAR_EMPTY;
       }
+    }
+  }
+}
+
+void Game::restoreMap() {
+  int border_width = 1;
+  for (int i = border_width; i < map_size - border_width; i++) {
+    for (int j = border_width; j < map_size - border_width; j++) {
+      map[i][j] = CHAR_EMPTY;
     }
   }
 }
@@ -38,8 +44,8 @@ void Game::draw() {
   }
 }
 
-void Game::addPoints(vector<Point> points, char point_char) {
-  for (auto p : points) {
+void Game::addPoints(const vector<Point> &points, char point_char) {
+  for (const auto &p : points) {
     if (p.x > 0 && p.x < map_size - 1 && p.y > 0 && p.y < map_size - 1)
       map[p.x][p.y] = point_char;
   }
@@ -79,7 +85,7 @@ void Game::makeFood() {
     unavailableMap[i][0] = 1;
     unavailableMap[i][map_size - 1] = 1;
   }
-  for (auto p : snake.getSegments()) {
+  for (const auto &p : snake.getSegments()) {
     unavailableMap[p.x][p.y] = 1;
   }
   for (int i = 0; i < map_size; i++) {
@@ -96,7 +102,7 @@ void Game::gameCheck() {
   Point p = snake.getHead();
   gameOver = !(p.x > 0 && p.x < map_size - 1 && p.y > 0 && p.y < map_size - 1);
 
-  vector<Point> segments = snake.getSegments();
+  const vector<Point> &segments = snake.getSegments();
   for (int i = 1; i < snake.getLength(); i++) {
     if (p == segments[i]) {
       gameOver = true;
@@ -107,11 +113,11 @@ void Game::gameCheck() {
   if (gameOver)
     return;
 
-  vector<Point> foods = food.getPositions();
+  const vector<Point> &foods = food.getPositions();
   if (foods.empty()) {
     makeFood();
   } else {
-    for (auto f : foods) {
+    for (const auto &f : foods) {
       if (p == f) {
         food.eatFood(f);
         snake.grow();
@@ -154,4 +160,17 @@ void Game::update() {
       draw();
     }
   }
+}
+
+void Game::start() {
+  system("cls");
+  cout << "=== Snake Game ===" << endl;
+  cout << "Controls:" << endl;
+  cout << "  w/a/s/d - Move" << endl;
+  cout << "  Space   - Pause" << endl;
+  cout << "  q       - Quit" << endl;
+  cout << "\nPress any key to start..." << endl;
+  system("pause");
+  system("cls");
+  update();
 }

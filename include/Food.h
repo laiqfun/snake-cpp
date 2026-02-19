@@ -1,17 +1,21 @@
+#ifndef FOOD_H
+#define FOOD_H
+
 #include "Config.h"
-#include <ctime>
 #include <random>
 #include <vector>
-using namespace std;
+
 class Food {
 private:
-  vector<Point> foodsPositions;
-  mt19937 rng;
+  std::vector<Point> foodsPositions;
+  std::mt19937 rng;
 
 public:
   Food();
   ~Food();
-  Point spawnFood(vector<Point> points);
-  vector<Point> getPositions() const { return foodsPositions; };
+  Point spawnFood(std::vector<Point> points);
+  const std::vector<Point> &getPositions() const { return foodsPositions; };
   void eatFood(Point position);
 };
+
+#endif

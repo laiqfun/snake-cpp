@@ -1,20 +1,15 @@
 #include "Config.h"
 
-Point getDirectonVector(Direction dir) {
-  Point dirVector(0, 0);
+Point getDirectionVector(Direction dir) {
   switch (dir) {
   case Up:
-    dirVector = Point{-1, 0};
-    break;
+    return Point{-1, 0};
   case Down:
-    dirVector = Point{1, 0};
-    break;
+    return Point{1, 0};
   case Left:
-    dirVector = Point{0, -1};
-    break;
+    return Point{0, -1};
   case Right:
-    dirVector = Point{0, 1};
-    break;
+    return Point{0, 1};
   }
-  return dirVector;
+  return Point{0,0};
 };

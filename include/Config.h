@@ -1,8 +1,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <ctime>
-
 const int MAP_SIZE = 11;
 
 enum Direction { Up, Down, Left, Right };
@@ -32,6 +30,6 @@ const char KEY_MOVE_RIGHT = 'd';
 const char KEY_QUIT = 'q';
 const char KEY_PAUSE = ' ';
 
-Point getDirectonVector(Direction dir);
+Point getDirectionVector(Direction dir);
 
 #endif

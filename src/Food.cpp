@@ -1,9 +1,5 @@
 #include "Food.h"
-#include "Config.h"
 #include <algorithm>
-#include <ctime>
-#include <random>
-#include <vector>
 using namespace std;
 
 Food::Food() : rng(random_device{}()) {}
